@@ -17,7 +17,14 @@ except ImportError:
     import configparser as ConfigParser
 from alembic import command
 from sqlalchemy import create_engine, event
-import models
+# import models
+
+from ruciostd.models import (SoftModelBase, Account, AccountAttrAssociation, Identity, IdentityAccountAssociation, Scope, DataIdentifier, DidMeta, 
+                             DeletedDataIdentifier, UpdatedDID, BadReplicas, BadPFNs, QuarantinedReplica, DIDKey, DIDKeyValueAssociation, DataIdentifierAssociation, 
+                             ConstituentAssociation, ConstituentAssociationHistory, DataIdentifierAssociationHistory, RSE, RSELimit, RSETransferLimit, RSEUsage, 
+                             UpdatedRSECounter, RSEAttrAssociation, RSEProtocols, AccountLimit, AccountUsage, RSEFileAssociation, CollectionReplica, UpdatedCollectionReplica, RSEFileAssociationHistory, ReplicationRule, ReplicationRuleHistoryRecent, ReplicationRuleHistory, ReplicaLock, DatasetLock, UpdatedAccountCounter, 
+                             Request, Source, Distance, Subscription, Token, Message, MessageHistory, AlembicVersion, Config, Heartbeats, NamingConvention, TemporaryDataIdentifier, LifetimeExceptions)
+from ruciostd.models import models, register_models
 
 def get_config_parser(cfg_file_path):
     """ Reads specified config file in a config parser.
