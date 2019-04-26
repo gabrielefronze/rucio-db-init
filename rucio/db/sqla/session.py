@@ -37,7 +37,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 from rucio.common.config import config_get
-from rucio.common.exceptions import RucioException, DatabaseException
+from rucio.common.exception import RucioException, DatabaseException
 
 try:
     main_script = os.path.basename(sys.argv[0])
