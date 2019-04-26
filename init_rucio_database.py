@@ -26,7 +26,7 @@ from rucio.db.sqla.models import (SoftModelBase, Account, AccountAttrAssociation
                                     ConstituentAssociation, ConstituentAssociationHistory, DataIdentifierAssociationHistory, RSE, RSELimit, RSETransferLimit, RSEUsage, 
                                     UpdatedRSECounter, RSEAttrAssociation, RSEProtocols, AccountLimit, AccountUsage, RSEFileAssociation, CollectionReplica, UpdatedCollectionReplica, RSEFileAssociationHistory, ReplicationRule, ReplicationRuleHistoryRecent, ReplicationRuleHistory, ReplicaLock, DatasetLock, UpdatedAccountCounter, 
                                     Request, Source, Distance, Subscription, Token, Message, MessageHistory, AlembicVersion, Config, Heartbeats, NamingConvention, TemporaryDataIdentifier, LifetimeExceptions)
-from rucio.db.sqla.models import models, register_models
+from rucio.db.sqla.models import register_models
 from rucio.db.sqla.session import mysql_ping_listener, mysql_convert_decimal_to_float, psql_convert_decimal_to_float, _fk_pragma_on_connect, my_on_connect
 
 def get_config_parser(cfg_file_path):
@@ -86,7 +86,7 @@ def init_rucio_database(cfg_file_path, echo=True, tests=False):
     print("Alembic configuration file: ", alembic_cfg)
 
     engine = get_temp_engine(config_parser, echo=echo)
-    models.register_models(engine)
+    register_models(engine)
 
     # Put the database under version control
     command.stamp(alembic_cfg, "head")
