@@ -83,7 +83,7 @@ def init_rucio_database(cfg_file_path, echo=True, tests=False):
 
     print("Applying the Rucio database schema to database endpoint: ", config_parser.get('database', 'default'))
     print("Rucio configuration file: ", cfg_file_path)
-    print("Alembic configuration file: ", alembic_cfg)
+    print("Alembic.ini configuration file: ", alembic_cfg)
 
     engine = get_temp_engine(config_parser, echo=echo)
     register_models(engine)
