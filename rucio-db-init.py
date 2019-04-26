@@ -17,7 +17,7 @@ except ImportError:
     import configparser as ConfigParser
 from alembic import command
 from sqlalchemy import create_engine, event
-from rucio.db.sqla import models
+import models
 
 def get_config_parser(cfg_file_path):
     """ Reads specified config file in a config parser.
