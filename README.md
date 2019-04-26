@@ -1,2 +1,2 @@
 # rucio-db-init
-A standalone initializer for SQl databases used by Rucio
+A standalone initializer for SQL databases used by Rucio
