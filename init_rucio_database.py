@@ -81,7 +81,7 @@ def init_rucio_database(echo=True, tests=False):
     """ Applies the schema to the database. Run this command once to build the database. """
 
     config_parser = config_get()
-    alembic_cfg = config_parser.get('alembic', 'cfg')
+    alembic_cfg = os.environ["RUCIO_HOME"],"/etc/alembic.ini"
 
     print("Applying the Rucio database schema to database endpoint: ", config_parser.get('database', 'default'))
     print("Rucio configuration file: ", os.environ["RUCIO_HOME"],"/etc/rucio.cfg")
