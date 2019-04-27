@@ -12,7 +12,7 @@ elif [[ "$VERSION" == "master" || "$VERSION" == "hotfix" || "$VERSION" == "next"
     svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
 else
     echo "FATAL: unsupported TAG=$TAG."
-    exit(1)
+    exit
 #     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
 #     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
 fi
