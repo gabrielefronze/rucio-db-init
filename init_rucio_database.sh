@@ -5,8 +5,8 @@ GIT_REPO_URL="https://github.com/rucio/rucio"
 mkdir rucio
 
 if [[ ! -z "$TAG" && "$TAG" != "master" ]]; then
-    svn export "$GIT_REPO_URL"/branches/"$TAG"/lib/rucio/common rucio/common
-    svn export "$GIT_REPO_URL"/branches/"$TAG"/lib/rucio/db rucio/db
+    svn export "$GIT_REPO_URL"/tags/"$TAG"/lib/rucio/common rucio/common
+    svn export "$GIT_REPO_URL"/tags/"$TAG"/lib/rucio/db rucio/db
 else
     svn export "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
     svn export "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
