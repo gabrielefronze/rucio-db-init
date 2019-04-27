@@ -1,3 +1,5 @@
+TAG=$1
+
 git init rucio-git
 cd rucio-git
 git remote add -f origin https://github.com/rucio/rucio.git
@@ -8,6 +10,8 @@ echo "lib/rucio/common" >> .git/info/sparse-checkout
 echo "lib/rucio/db" >> .git/info/sparse-checkout
 
 git pull origin master
+
+if [[ ! -z $TAG ]] git checkout tags/"$TAG"
 
 mkdir ../rucio
 
