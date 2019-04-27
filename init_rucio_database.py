@@ -80,8 +80,8 @@ def get_temp_engine(echo=True):
 def init_rucio_database(echo=True, tests=False):
     """ Applies the schema to the database. Run this command once to build the database. """
 
-    rucio_cfg = print(os.environ["RUCIO_HOME"]+"/etc/rucio.cfg")
-    alembic_cfg = print(os.environ["RUCIO_HOME"]+"/etc/alembic.ini")
+    rucio_cfg = os.environ["RUCIO_HOME"]+"/etc/rucio.cfg"
+    alembic_cfg = os.environ["RUCIO_HOME"]+"/etc/alembic.ini"
 
     print("Applying the Rucio database schema to database endpoint: ", config_get('database', 'default'))
     print("Rucio configuration file: ", rucio_cfg)
@@ -91,7 +91,7 @@ def init_rucio_database(echo=True, tests=False):
     register_models(engine)
 
     # Put the database under version control
-    command.stamp(alembic_cfg, "head")
+    # command.stamp(alembic_cfg, "head")
 
 if __name__ == "__main__":
     init_rucio_database()
