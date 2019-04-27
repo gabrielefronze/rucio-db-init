@@ -92,4 +92,4 @@ def init_rucio_database(cfg_file_path, echo=True, tests=False):
     command.stamp(alembic_cfg, "head")
 
 if __name__ == "__main__":
-    init_rucio_database("rucio-db.cfg")
+    init_rucio_database('rucio-db.cfg')
