@@ -49,19 +49,19 @@ from rucio.db.sqla.session import mysql_ping_listener, mysql_convert_decimal_to_
 
 #     return config_parser
 
-def get_temp_engine(config_parser, echo=True):
+def get_temp_engine(echo=True):
     """ Creates a engine to a specific database.
         :returns: engine
     """
 
-    sql_connection = config_parser.get('database', 'default')
+    sql_connection = config_get('database', 'default')
     config_params = [('pool_size', int), ('max_overflow', int), ('pool_timeout', int),
                         ('pool_recycle', int), ('echo', int), ('echo_pool', str),
                         ('pool_reset_on_return', str), ('use_threadlocal', int)]
     params = {}
     for param, param_type in config_params:
         try:
-            params[param] = param_type(config_parser.get('database', param))
+            params[param] = param_type(config_get('database', param))
         except:
             pass
     engine = create_engine(sql_connection, **params)
@@ -80,14 +80,13 @@ def get_temp_engine(config_parser, echo=True):
 def init_rucio_database(echo=True, tests=False):
     """ Applies the schema to the database. Run this command once to build the database. """
 
-    config_parser = config_get()
     alembic_cfg = os.environ["RUCIO_HOME"],"/etc/alembic.ini"
 
-    print("Applying the Rucio database schema to database endpoint: ", config_parser.get('database', 'default'))
+    print("Applying the Rucio database schema to database endpoint: ", config_get('database', 'default'))
     print("Rucio configuration file: ", os.environ["RUCIO_HOME"],"/etc/rucio.cfg")
     print("Alembic.ini configuration file: ", alembic_cfg)
 
-    engine = get_temp_engine(config_parser, echo=echo)
+    engine = get_temp_engine(echo=echo)
     register_models(engine)
 
     # Put the database under version control
