@@ -11,7 +11,9 @@ echo "lib/rucio/db" >> .git/info/sparse-checkout
 
 git pull origin master
 
-if [[ ! -z $TAG ]] git checkout tags/"$TAG"
+if [[ ! -z $TAG ]]; then
+    git checkout tags/"$TAG"
+fi
 
 mkdir ../rucio
 
