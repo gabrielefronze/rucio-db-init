@@ -1,0 +1,1 @@
+python3 init_rucio_database.py
