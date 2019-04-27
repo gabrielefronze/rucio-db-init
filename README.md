@@ -1,5 +1,7 @@
 # rucio-db-init
-A standalone initializer for SQL databases used by Rucio
+A standalone initializer for SQL databases used by Rucio.
+
+It requires `python3` with `pip3` and `svn` available in `$PATH`.
 
 This is intended to run using python3.
 It requires requests, alembic, sqlalchemy, jsonschema, psycopg2-binary and retrying.
@@ -18,7 +20,12 @@ Due to the Rucio configuration structure it is not possible to simply pass two c
 The `init-rucio-repo.sh` introduces support for different rucio tags. The default tag is `master` but different tags can be used via:
 
 ```
+    source init_rucio_database.sh <--- automatically converted to master
+    source init_rucio_database.sh master
+    source init_rucio_database.sh hotfix
+    source init_rucio_database.sh next
     source init_rucio_database.sh 1.19.1
 ```
 
-Please note that due to Rucio development, tags before 1.19.X are not supported due to the fact that in Python 3 `ConfigParser` has been renamed to `configparser`.
+Please note that due to Rucio development, tags before 1.19.1 are not supported due to the fact that in Python3 `ConfigParser` has been renamed to `configparser`.
+This script will be extended to handle such option if needed in the future.
