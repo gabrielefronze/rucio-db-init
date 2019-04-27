@@ -9,4 +9,6 @@ echo "lib/rucio/db" >> .git/info/sparse-checkout
 
 git pull origin master
 
+cd ..
+
 python3 init_rucio_database.py
