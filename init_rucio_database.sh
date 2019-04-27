@@ -7,12 +7,14 @@ mkdir rucio
 if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db rucio/db
-elif [[ "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
+elif [[ "$VERSION" == "master" || "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
     svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/common rucio/common
     svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
 else
-    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
-    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
+    echo "FATAL: unsupported TAG=$TAG."
+    exit(1)
+#     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
+#     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
 fi
 
 touch ./rucio/__init__.py
