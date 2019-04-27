@@ -20,7 +20,7 @@ except ImportError:
 from alembic import command
 from sqlalchemy import create_engine, event
 
-os.environ["RUCIO_HOME"]="/opt/rucio-db-init"
+# os.environ["RUCIO_HOME"]="/opt/rucio-db-init"
 
 from rucio.db.sqla.models import (SoftModelBase, Account, AccountAttrAssociation, Identity, IdentityAccountAssociation, Scope, DataIdentifier, DidMeta, 
                                     DeletedDataIdentifier, UpdatedDID, BadReplicas, BadPFNs, QuarantinedReplica, DIDKey, DIDKeyValueAssociation, DataIdentifierAssociation, 
