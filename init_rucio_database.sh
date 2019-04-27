@@ -5,14 +5,14 @@ GIT_REPO_URL="https://github.com/rucio/rucio"
 mkdir rucio
 
 if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
-    svn export "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
-    svn export "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db rucio/db
+    svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
+    svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db rucio/db
 elif [[ "$VERSION" == "master" || "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
-    svn export "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/common rucio/common
-    svn export "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
+    svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/common rucio/common
+    svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
 else
-    svn export "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
-    svn export "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
+    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
+    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
 fi
 
 touch ./rucio/__init__.py
