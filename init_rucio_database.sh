@@ -1,12 +1,15 @@
-TAG=$1
+VERSION=$1
 
 GIT_REPO_URL="https://github.com/rucio/rucio"
 
 mkdir rucio
 
-if [[ ! -z "$TAG" && "$TAG" != "master" ]]; then
-    svn export "$GIT_REPO_URL"/tags/"$TAG"/lib/rucio/common rucio/common
-    svn export "$GIT_REPO_URL"/tags/"$TAG"/lib/rucio/db rucio/db
+if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
+    svn export "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
+    svn export "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db rucio/db
+elif [[ "$VERSION" == "master" || "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
+    svn export "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/common rucio/common
+    svn export "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
 else
     svn export "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
     svn export "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
