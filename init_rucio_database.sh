@@ -21,7 +21,7 @@ cd ..
 
 rm -rf rucio-git
 
-export RUCIO_HOME=$(dirname $0)
+export RUCIO_HOME=/opt/rucio-db-init
 
 python3 init_rucio_database.py
 
