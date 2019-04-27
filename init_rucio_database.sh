@@ -1,31 +1,18 @@
 TAG=$1
 
-git init rucio-git
-cd rucio-git
-git remote add -f origin https://github.com/rucio/rucio.git
+GIT_REPO_URL="https://github.com/rucio/rucio"
 
-git config core.sparseCheckout true
+mkdir rucio
 
-echo "lib/rucio/common" >> .git/info/sparse-checkout
-echo "lib/rucio/db" >> .git/info/sparse-checkout
-
-git pull origin master
-
-if [[ ! -z "$TAG" ]]; then
-    git checkout tags/"$TAG"
+if [[ ! -z "$TAG" && "$TAG" != "master" ]]; then
+    svn export "$GIT_REPO_URL"/branches/"$TAG"/lib/rucio/common rucio/common
+    svn export "$GIT_REPO_URL"/branches/"$TAG"/lib/rucio/db rucio/db
+else
+    svn export "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
+    svn export "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
 fi
 
-mkdir ../rucio
-
-mv lib/rucio ../
-
-cd ../rucio
-
-touch __init__.py
-
-cd ..
-
-rm -rf rucio-git
+touch ./rucio/__init__.py
 
 if [[ ! -z "$RUCIO_HOME" ]]; then
     OLD_RUCIO_HOME="$RUCIO_HOME"
@@ -40,3 +27,7 @@ unset RUCIO_HOME
 if [[ ! -z "$OLD_RUCIO_HOME" ]]; then
     export RUCIO_HOME="$OLD_RUCIO_HOME"
 fi
+
+rm -rf rucio
+
+unset GIT_REPO_URL
