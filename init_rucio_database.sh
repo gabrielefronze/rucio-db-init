@@ -11,7 +11,7 @@ git pull origin master
 
 mkdir ../rucio
 
-mv -r lib/rucio/* ../rucio
+mv -r lib/rucio/* ../rucio/*
 
 cd ../rucio
 
