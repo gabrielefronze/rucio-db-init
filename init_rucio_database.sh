@@ -6,18 +6,17 @@ mkdir rucio
 
 if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
-    svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db rucio/db
-elif [[ "$VERSION" == "master" || "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
+    svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db/sqla rucio/db/sqla
+elif [[ "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
     svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/common rucio/common
-    svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db rucio/db
+    svn export -q "$GIT_REPO_URL"/branches/"$VERSION"/lib/rucio/db/sqla rucio/db/sqla
 else
-    echo "FATAL: unsupported TAG=$TAG."
-    exit
-#     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
-#     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db rucio/db
+    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
+    svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db/sqla rucio/db/sqla
 fi
 
 touch ./rucio/__init__.py
+touch ./rucio/db/__init__.py
 
 if [[ ! -z "$RUCIO_HOME" ]]; then
     OLD_RUCIO_HOME="$RUCIO_HOME"
