@@ -82,6 +82,7 @@ def init_rucio_database(echo=True, tests=False):
 
     rucio_cfg = os.environ["RUCIO_HOME"]+"/etc/rucio.cfg"
     alembic_cfg = os.environ["RUCIO_HOME"]+"/etc/alembic.ini"
+    alembic_cfg.set_main_option("script_location", "myapp:migrations")
 
     print("Applying the Rucio database schema to database endpoint: ", config_get('database', 'default'))
     print("Rucio configuration file: ", rucio_cfg)
