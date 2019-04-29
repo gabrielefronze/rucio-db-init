@@ -85,13 +85,13 @@ def init_rucio_database(echo=True, tests=False):
 
     print("Rucio configuration file: ", rucio_cfg_file)
     print("Alembic.ini configuration file: ", alembic_cfg_file)
-    print("Applying the Rucio database schema to database endpoint: "+config_get('database', 'default')+"... ",end='')
+    print("Applying the Rucio database schema to database endpoint: "+config_get('database', 'default')+"... ", end='', flush=True)
     engine = get_temp_engine(echo=echo)
     register_models(engine)
     print("done")
 
-    print("Stamping databse version in alembic... ",end='')
-    alembic_cfg = Config(config_get('alembic', 'cfg'))
+    print("Stamping databse version in alembic... ", end='', flush=True)
+    alembic_cfg = config_get('alembic', 'cfg')
     # Put the database under version control
     command.stamp(alembic_cfg, "head")
     print("done")
