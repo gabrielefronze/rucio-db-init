@@ -94,7 +94,7 @@ def init_rucio_database(echo=True, tests=False):
 
     # Put the database under version control
     print("Stamping databse version in alembic... ", end='', flush=True)
-    alembic_cfg = Config(alembic_cfg_file)
+    alembic_cfg = Config("/opt/rucio-db-init/etc/alembic.ini")
     command.stamp(alembic_cfg, "head")
     print("done")
 
