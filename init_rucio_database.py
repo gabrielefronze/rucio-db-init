@@ -32,24 +32,6 @@ from rucio.db.sqla.models import (SoftModelBase, Account, AccountAttrAssociation
 from rucio.db.sqla.models import register_models
 from rucio.db.sqla.session import mysql_ping_listener, mysql_convert_decimal_to_float, psql_convert_decimal_to_float, _fk_pragma_on_connect, my_on_connect
 
-# def get_config_parser(cfg_file_path):
-#     """ Reads specified config file in a config parser.
-#         :returns: config_parser
-#     """
-
-#     config_parser = ConfigParser.SafeConfigParser(os.environ)
-
-#     has_config = config_parser.read(cfg_file_path) == [cfg_file_path]
-
-#     if not has_config:
-#         raise Exception('Could not load rucio configuration file rucio.cfg.'
-#                         'Rucio looks in the following directories for a configuration file, in order:'
-#                         '\n\t${RUCIO_HOME}/etc/rucio.cfg'
-#                         '\n\t/opt/rucio/etc/rucio.cfg'
-#                         '\n\t${VIRTUAL_ENV}/etc/rucio.cfg')
-
-#     return config_parser
-
 def get_temp_engine(echo=True):
     """ Creates a engine to a specific database.
         :returns: engine
@@ -65,7 +47,9 @@ def get_temp_engine(echo=True):
             params[param] = param_type(config_get('database', param))
         except:
             pass
+
     engine = create_engine(sql_connection, **params)
+
     if 'mysql' in sql_connection:
         event.listen(engine, 'checkout', mysql_ping_listener)
         event.listen(engine, 'connect', mysql_convert_decimal_to_float)
@@ -76,6 +60,7 @@ def get_temp_engine(echo=True):
     elif 'oracle' in sql_connection:
         event.listen(engine, 'connect', my_on_connect)
     assert engine
+
     return engine
 
 def init_rucio_database(echo=True, tests=False):
