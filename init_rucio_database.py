@@ -18,6 +18,7 @@ try:
 except ImportError:
     import configparser as ConfigParser
 from alembic import command
+from alembic.config import Config
 from sqlalchemy import create_engine, event
 
 # os.environ["RUCIO_HOME"]="/opt/rucio-db-init"
@@ -83,6 +84,7 @@ def init_rucio_database(echo=True, tests=False):
     rucio_cfg_file = os.environ["RUCIO_HOME"]+"/etc/rucio.cfg"
     alembic_cfg_file = os.environ["RUCIO_HOME"]+"/etc/alembic.ini"
 
+    # Apply database schema to the provided endpoint
     print("Rucio configuration file: ", rucio_cfg_file)
     print("Alembic.ini configuration file: ", alembic_cfg_file)
     print("Applying the Rucio database schema to database endpoint: "+config_get('database', 'default')+"... ", end='', flush=True)
@@ -90,9 +92,9 @@ def init_rucio_database(echo=True, tests=False):
     register_models(engine)
     print("done")
 
-    print("Stamping databse version in alembic... ", end='', flush=True)
-    alembic_cfg = config_get('alembic', 'cfg')
     # Put the database under version control
+    print("Stamping databse version in alembic... ", end='', flush=True)
+    alembic_cfg = Config(config_get('alembic', 'cfg'))
     command.stamp(alembic_cfg, "head")
     print("done")
 
