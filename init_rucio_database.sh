@@ -4,6 +4,7 @@ GIT_REPO_URL="https://github.com/rucio/rucio"
 
 mkdir rucio
 
+echo -n "Retrieving rucio $TAG... "
 if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db/sqla rucio/db/sqla
@@ -14,9 +15,12 @@ else
     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/common rucio/common
     svn export -q "$GIT_REPO_URL"/trunk/lib/rucio/db/sqla rucio/db/sqla
 fi
+echo "done"
 
+echo -n "Initializing python workspace... "
 touch ./rucio/__init__.py
 touch ./rucio/db/__init__.py
+echo "done"
 
 if [[ ! -z "$RUCIO_HOME" ]]; then
     OLD_RUCIO_HOME="$RUCIO_HOME"
