@@ -1,11 +1,12 @@
-VERSION=$1
+# $1 is taken as tag, set to master if not specified
+VERSION=${1:-master}
 
 GIT_REPO_URL="https://github.com/rucio/rucio"
 
 mkdir rucio
 
 echo -n "Retrieving rucio $TAG... "
-if [[ ! -z "$VERSION" && "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
+if [[ "$VERSION" != "master" && "$VERSION" != "hotfix" && "$VERSION" != "next" ]]; then
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/common rucio/common
     svn export -q "$GIT_REPO_URL"/tags/"$VERSION"/lib/rucio/db/sqla rucio/db/sqla
 elif [[ "$VERSION" == "hotfix" || "$VERSION" == "next" ]]; then
