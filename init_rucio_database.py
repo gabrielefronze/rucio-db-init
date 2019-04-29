@@ -83,6 +83,7 @@ def init_rucio_database(echo=True, tests=False):
 
     rucio_cfg_file = os.environ["RUCIO_HOME"]+"/etc/rucio.cfg"
     alembic_cfg_file = os.environ["RUCIO_HOME"]+"/etc/alembic.ini"
+    alembic_script_location = os.environ["RUCIO_HOME"]+"/rucio/db/sqla/migrate_repo"
 
     # Apply database schema to the provided endpoint
     print("Rucio configuration file: ", rucio_cfg_file)
@@ -94,7 +95,8 @@ def init_rucio_database(echo=True, tests=False):
 
     # Put the database under version control
     print("Stamping databse version in alembic... ", end='', flush=True)
-    alembic_cfg = AlConfig("/opt/rucio-db-init/etc/alembic.ini")
+    alembic_cfg = AlConfig(alembic_cfg_file)
+    alembic_cfg.set_main_option("script_location", alembic_script_location)
     command.stamp(alembic_cfg, "head")
     print("done")
 
